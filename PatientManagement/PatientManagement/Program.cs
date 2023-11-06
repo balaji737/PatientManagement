@@ -13,11 +13,12 @@ namespace PatientManagement
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddNewtonsoftJson();
             builder.Services.AddDbContext<PatientDbContext>(
                          options => options.UseSqlServer(builder.Configuration.GetConnectionString("PatientDB")));
-            builder.Services.AddTransient<IPatientRepository, PatientRepository>();
 
+            builder.Services.AddTransient<IPatientRepository, PatientRepository>();
+            builder.Services.AddAutoMapper(typeof(Program));
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
